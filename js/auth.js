@@ -9,7 +9,8 @@ function getToken() {
 }
 
 function isLoggedIn() {
-    return getToken() !== null
+   const token = getToken();
+   return Boolean(token && token.trim());
 }
 
 function logout() {

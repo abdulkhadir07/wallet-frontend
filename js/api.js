@@ -41,9 +41,6 @@ async function login(phoneNumber, password) {
     });
     await assertOk(response);
     const data = await response.json();
-    const token = data.token ?? data.accessToken ?? data.access_token;
-    if (!token) throw new Error("Login succeeded but no token in response");
-    saveToken(token);
     return data;
 }
 
@@ -63,7 +60,7 @@ async function register(firstName, lastName, dateOfBirth, country, phoneNumber, 
             password: password
         })
     });
-    await assertOk(response);
+    await assertOk(response);``
     const data = await response.json();
     return data;
 }
