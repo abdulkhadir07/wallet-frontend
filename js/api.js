@@ -1,0 +1,175 @@
+const BASE_URL = "https://digital-wallet-api-551y.onrender.com"
+
+function getAuthHeaders() {
+    const headers = { "Content-Type": "application/json"}
+    const token = getToken();
+    if (token) headers.Authorization = `Bearer ${token}`;
+    return headers;
+}
+
+async function readErrorPayload(response) {
+  const raw = await response.text();
+  if (!raw) return { message: null, detail: raw };
+  try {
+    const parsed = JSON.parse(raw);
+    const message =
+      parsed?.message ??
+      parsed?.error ??
+      (typeof parsed === "string" ? parsed : null);
+    return { message, detail: parsed };
+  } catch {
+    return { message: raw.slice(0, 500), detail: raw };
+  }
+}
+
+async function assertOk(response) {
+  if (response.ok) return;
+  const { message } = await readErrorPayload(response);
+  throw new Error(message || response.statusText || `Request failed (${response.status})`);
+}
+
+async function login(phoneNumber, password) {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            phoneNumber: phoneNumber,
+            password: password
+        })
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+
+async function register(firstName, lastName, dateOfBirth, country, phoneNumber, email, password) {
+    const response = await fetch(`${BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            firstName: firstName,
+            lastName: lastName,
+            dateOfBirth: dateOfBirth,
+            country: country,
+            phoneNumber: phoneNumber,
+            email: email,
+            password: password
+        })
+    });
+    await assertOk(response);``
+    const data = await response.json();
+    return data;
+}
+
+async function verify(phoneNumber, verificationCode){
+    const response = await fetch(`${BASE_URL}/auth/verify`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            phoneNumber: phoneNumber,
+            verificationCode: verificationCode
+        })
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+
+async function getWallet() {
+    const response = await fetch(`${BASE_URL}/wallet/me`, {
+        method: "GET",
+        headers: getAuthHeaders()
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+
+async function getTransactions() {
+    const response = await fetch(`${BASE_URL}/wallet/transactions`, {
+        method: "GET",
+        headers: getAuthHeaders()
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+
+async function sendTransfer(recipientPhoneNumber, senderAmount, description) {
+    const response = await fetch(`${BASE_URL}/transfer/send`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+            recipientPhoneNumber: recipientPhoneNumber,
+            senderAmount: senderAmount,
+            description: description
+        })
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+
+async function getHistory() {
+    const response = await fetch(`${BASE_URL}/transfer/history`, {
+        method: "GET",
+        headers: getAuthHeaders()
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+async function getSent() {
+    const response = await fetch(`${BASE_URL}/transfer/sent`, {
+        method: "GET",
+        headers: getAuthHeaders()
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+
+async function getReceived() {
+    const response = await fetch(`${BASE_URL}/transfer/received`, {
+        method: "GET",
+        headers: getAuthHeaders()
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+async function getTransferByReference(reference) {
+    const response = await fetch(`${BASE_URL}/transfer/${reference}`, {
+        method: "GET",
+        headers: getAuthHeaders()
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+
+async function freezeWallet() {
+    const response = await fetch(`${BASE_URL}/wallet/freeze`, {
+        method: "PATCH",
+        headers: getAuthHeaders()
+    });
+    await assertOk(response);
+    const data = await response.json()
+    return data;
+}
+
+async function unfreezeWallet() {
+    const response = await fetch(`${BASE_URL}/wallet/unfreeze`, {
+        method: "PATCH",
+        headers: getAuthHeaders()
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
