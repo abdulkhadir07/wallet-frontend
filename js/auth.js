@@ -1,6 +1,6 @@
 const TOKEN_KEY = "enum_token";
 
-function savedToken(token) {
+function saveToken(token) {
     localStorage.setItem(TOKEN_KEY, token)
 }
 
