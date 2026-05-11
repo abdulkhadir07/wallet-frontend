@@ -9,6 +9,34 @@ const step4 = document.querySelector("#step-4");
 function show(el) {el.classList.remove('hidden');}
 function hide(el) {el.classList.add('hidden');}
 
+const countryCodes = {
+    USA: "+1",
+    CANADA: "+1",
+    UK: "+44",
+    GERMANY: "+49",
+    FRANCE: "+33",
+    ITALY: "+39",
+    SPAIN: "+34",
+    SWITZERLAND: "+41",
+    JAPAN: "+81",
+    INDIA: "+91",
+    CHINA: "+86",
+    SOUTH_KOREA: "+82",
+    GAMBIA: "+220",
+    NIGERIA: "+234",
+    GHANA: "+233",
+    MOROCCO: "+212",
+    SOUTH_AFRICA: "+27",
+    ETHIOPIA: "+251",
+    KENYA: "+254",
+    SENEGAL: "+221",
+    MALI: "+223",
+    IVORY_COAST: "+225",
+    BURKINA_FASO: "+226",
+    CAMEROON: "+237",
+    CONGO: "+242"
+}
+
 // Days
 const dobDay = document.querySelector("#dobDay")
 for (let i = 1; i <= 31; i++) {
@@ -107,17 +135,44 @@ document.querySelector("#next-3").addEventListener("click", () => {
     const country = document.querySelector("#country").value
     const phoneNumber = document.querySelector("#phoneNumberInput").value
 
+    const expectedCode = countryCodes[country];
+    const phoneRegex = /^\+\d+\s?\d{7,15}$/
+
     if(country === '') {
         countryError.textContent = "Please select your country of residence";
         countryError.classList.remove('hidden');
-    } else if (phoneNumber ==='') {
+    } else if (phoneNumber ==='' || phoneNumber === expectedCode) {
         phoneNumberError.textContent = "Please enter a valid phone number";
         phoneNumberError.classList.remove('hidden');
-    } else {
+    } else if (!phoneRegex.test(phoneNumber)) {
+        phoneNumberError.textContent = "Please enter a valid phone number."        
+        phoneNumberError.classList.remove('hidden');
+    }else {
         hide(step3);
         show(step4);
         countryError.classList.add('hidden');
         phoneNumberError.classList.add('hidden')
+    }
+});
+
+document.querySelector("#country").addEventListener("change", () => {
+    const country = document.querySelector("#country").value
+    const phoneNumberInput = document.querySelector("#phoneNumberInput");
+
+    if (country && countryCodes[country]) {
+        phoneNumberInput.value = countryCodes[country] + " ";
+    } else {
+        phoneNumberInput.value = "";
+    }
+});
+
+document.querySelector("#phoneNumberInput").addEventListener("input", () => {
+    const country = document.querySelector("#country").value
+    const phoneInput = document.querySelector("#phoneNumberInput")
+    const expectedCode = countryCodes[country] + " "
+
+    if (!phoneInput.value.startsWith(expectedCode)) {
+        phoneInput.value = expectedCode
     }
 });
 
