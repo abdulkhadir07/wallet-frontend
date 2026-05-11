@@ -21,6 +21,7 @@
             <div id="step-1" class="hidden">
                 <h1 class="text-2xl font-bold text-[#2D0A45] mb-6">What's your email</h1>
                 <input id="email" placeholder="Enter your email" type="email" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4"/>
+                <p id="email-error" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
                 <button id="next-1" class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">Next</button>
                 <button id="back-to-step-0" class="text-sm text-gray-400 mt-2 hover:text-[#2D0A45] transition">Back</button>
             </div>
@@ -28,16 +29,29 @@
             <!-- first&lastname, DOB -->
             <div id="step-2" class="hidden">
                 <h1 class="text-2xl font-bold text-[#2D0A45] mb-6">Tell us about yourself</h1>
-                <input id="first-nameInput" type="text" placeholder="your first name" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4"/>
-                <input id="last-nameInput" type="text" placeholder="your last name" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4"/>
-                <input id="DOBInput" type="date" placeholder="your date of birth" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4"/>
+                <input id="first-nameInput" type="text" placeholder="Enter your first name" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4"/>
+                <p id="firstNameError" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
+                <input id="last-nameInput" type="text" placeholder="Enter your last name" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4"/>
+                <p id="lastNameError" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
+                <div class="flex gap-2">
+                    <select id="dobDay" class="w-1/3 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4">
+                        <option value="">Day</option>
+                    </select>
+                    <select id="dobMonth" class="w-1/3 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4">
+                        <option value="">Month</option>
+                    </select>
+                    <select id="dobYear" class="w-1/3 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4">
+                        <option value="">Year</option>
+                    </select>
+                </div>
+                <p id="DOBError" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
                 <button id="next-2" class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">Next</button>
                 <button id="back-to-step-1" class="text-sm text-gray-400 mt-2 hover:text-[#2D0A45] transition">Back</button>
             </div>
 
             <!-- country, phoneNumber -->
             <div id="step-3" class="hidden">
-                <h1 class="text-2xl font-bold text-[#2D0A45] mb-6">Where are you registering from</h1>
+                <h1 class="text-2xl font-bold text-[#2D0A45] mb-6">Country of residence</h1>
                 <select id="country" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4">
                     <option value="">Select your country of residence</option>
                     <option value="USA">United States</option>
@@ -66,7 +80,9 @@
                     <option value="IVORY_COAST">Ivory Coast</option>
                     <option value="BURKINA_FASO">Burkina Faso</option>
                 </select>
-                <input id="phoneNumberInput" type="tel" placeholder="your phone number" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4"/>
+                <p id="countryError" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
+                <input id="phoneNumberInput" type="tel" placeholder="Enter your phone number" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4"/>
+                <p id="phoneNumberError" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
                 <button id="next-3" class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">Next</button>
                 <button id="back-to-step-2" class="text-sm text-gray-400 mt-2 hover:text-[#2D0A45] transition">Back</button>
             </div>
@@ -75,6 +91,8 @@
             <div id="step-4" class="hidden">
                 <h1 class="text-2xl font-bold text-[#2D0A45] mb-6">Create a password</h1>
                 <input id="passwordInput" type="password" placeholder="no less than 8 characters" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45] mb-4"/>
+                <p id="passwordError" class="text-red-500 text-sm mt-1 mb-2 hidden" ></p>
+                <p id="registerError" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
                 <button id="createAccountBtn" class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">Create</button>
                 <button id="back-to-step-3" class="text-sm text-gray-400 mt-2 hover:text-[#2D0A45] transition">Back</button>
             </div>
@@ -83,7 +101,7 @@
         </div>
 
 
-        <script src="register.js" defer></script>
+        <script src="../js/register.js" type="module" defer></script>
     </body>
 
 </html>
