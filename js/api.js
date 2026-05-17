@@ -28,7 +28,7 @@ async function assertOk(response) {
   throw new Error(message || response.statusText || `Request failed (${response.status})`);
 }
 
-async function login(phoneNumber, password) {
+export async function login(phoneNumber, password) {
     const response = await fetch(`${BASE_URL}/auth/login`, {
         method:"POST",
         headers: {
@@ -44,7 +44,7 @@ async function login(phoneNumber, password) {
     return data;
 }
 
-async function register(firstName, lastName, dateOfBirth, country, phoneNumber, email, password) {
+export async function register(firstName, lastName, dateOfBirth, country, phoneNumber, email, password) {
     const response = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
         headers: {
@@ -60,12 +60,12 @@ async function register(firstName, lastName, dateOfBirth, country, phoneNumber, 
             password: password
         })
     });
-    await assertOk(response);``
+    await assertOk(response);
     const data = await response.json();
     return data;
 }
 
-async function verify(phoneNumber, verificationCode){
+export async function verify(phoneNumber, verificationCode){
     const response = await fetch(`${BASE_URL}/auth/verify`, {
         method: "POST",
         headers: {
@@ -81,7 +81,7 @@ async function verify(phoneNumber, verificationCode){
     return data;
 }
 
-async function getWallet() {
+export async function getWallet() {
     const response = await fetch(`${BASE_URL}/wallet/me`, {
         method: "GET",
         headers: getAuthHeaders()
@@ -91,7 +91,7 @@ async function getWallet() {
     return data;
 }
 
-async function getTransactions() {
+export async function getTransactions() {
     const response = await fetch(`${BASE_URL}/wallet/transactions`, {
         method: "GET",
         headers: getAuthHeaders()
@@ -101,7 +101,7 @@ async function getTransactions() {
     return data;
 }
 
-async function sendTransfer(recipientPhoneNumber, senderAmount, description) {
+export async function sendTransfer(recipientPhoneNumber, senderAmount, description) {
     const response = await fetch(`${BASE_URL}/transfer/send`, {
         method: "POST",
         headers: getAuthHeaders(),
@@ -116,7 +116,7 @@ async function sendTransfer(recipientPhoneNumber, senderAmount, description) {
     return data;
 }
 
-async function getHistory() {
+export async function getHistory() {
     const response = await fetch(`${BASE_URL}/transfer/history`, {
         method: "GET",
         headers: getAuthHeaders()
@@ -125,7 +125,7 @@ async function getHistory() {
     const data = await response.json();
     return data;
 }
-async function getSent() {
+export async function getSent() {
     const response = await fetch(`${BASE_URL}/transfer/sent`, {
         method: "GET",
         headers: getAuthHeaders()
@@ -135,7 +135,7 @@ async function getSent() {
     return data;
 }
 
-async function getReceived() {
+export async function getReceived() {
     const response = await fetch(`${BASE_URL}/transfer/received`, {
         method: "GET",
         headers: getAuthHeaders()
@@ -144,7 +144,7 @@ async function getReceived() {
     const data = await response.json();
     return data;
 }
-async function getTransferByReference(reference) {
+export async function getTransferByReference(reference) {
     const response = await fetch(`${BASE_URL}/transfer/${reference}`, {
         method: "GET",
         headers: getAuthHeaders()
@@ -154,7 +154,7 @@ async function getTransferByReference(reference) {
     return data;
 }
 
-async function freezeWallet() {
+export async function freezeWallet() {
     const response = await fetch(`${BASE_URL}/wallet/freeze`, {
         method: "PATCH",
         headers: getAuthHeaders()
@@ -164,7 +164,7 @@ async function freezeWallet() {
     return data;
 }
 
-async function unfreezeWallet() {
+export async function unfreezeWallet() {
     const response = await fetch(`${BASE_URL}/wallet/unfreeze`, {
         method: "PATCH",
         headers: getAuthHeaders()
