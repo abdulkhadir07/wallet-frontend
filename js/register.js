@@ -9,6 +9,8 @@ const step4 = document.querySelector("#step-4");
 function show(el) {el.classList.remove('hidden');}
 function hide(el) {el.classList.add('hidden');}
 
+const MINIMUM_AGE = 18;
+
 const countryCodes = {
     USA: "+1",
     CANADA: "+1",
@@ -37,6 +39,43 @@ const countryCodes = {
     CONGO: "+242"
 }
 
+function showError(errorElement, message) {
+  errorElement.textContent = message;
+  errorElement.classList.remove("hidden");
+}
+
+function clearError(errorElement) {
+  errorElement.textContent = "";
+  errorElement.classList.add("hidden");
+}
+
+function isValidDateOfBirth(day, month, year) {
+  const birthDate = new Date(Number(year), Number(month) - 1, Number(day));
+
+  return (
+    birthDate.getFullYear() === Number(year) &&
+    birthDate.getMonth() === Number(month) - 1 &&
+    birthDate.getDate() === Number(day)
+  );
+}
+
+function isAtLeastMinimumAge(day, month, year) {
+  const birthDate = new Date(Number(year), Number(month) - 1, Number(day));
+  const today = new Date();
+
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+
+  if (
+    monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age -= 1;
+  }
+
+  return age >= MINIMUM_AGE;
+}
+
 // Days
 const dobDay = document.querySelector("#dobDay")
 for (let i = 1; i <= 31; i++) {
@@ -59,7 +98,7 @@ months.forEach((month, index) => {
 // Years
 const dobYear = document.querySelector("#dobYear")
 const currentYear = new Date().getFullYear()
-for (let y = currentYear - 10; y >= 1920; y--) {
+for (let y = currentYear - MINIMUM_AGE; y >= 1920; y--) {
     const option = document.createElement("option")
     option.value = y
     option.textContent = y
@@ -74,84 +113,88 @@ document.querySelector("#create-account-btn").addEventListener("click", () => {
 document.querySelector("#next-1").addEventListener("click", () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     const emailError = document.querySelector("#email-error");
-    const email = document.querySelector("#email").value
+    clearError(emailError);
+    const email = document.querySelector("#email").value.trim()
 
     if (email.trim() === '') {
-        emailError.textContent = "Email is required.";
-        emailError.classList.remove('hidden');
+        showError(emailError, "Email is required.")
     } else if (!emailRegex.test(email)) {
-        emailError.textContent = "Please enter a valid email.";
-        emailError.classList.remove('hidden');
+        showError(emailError, "Please enter a valid email.")
     } else {
         hide(step1);
         show(step2);
-        emailError.classList.add('hidden');
+        clearError(emailError);
     }
 });
 
 document.querySelector("#next-2").addEventListener("click", () => {
-    const firstNameError = document.querySelector("#firstNameError");
-    const lastNameError = document.querySelector("#lastNameError");
-    const dobError = document.querySelector("#DOBError");
 
-    const firstName = document.querySelector("#first-nameInput").value
-    const lastName = document.querySelector("#last-nameInput").value
+    const firstNameError = document.querySelector("#firstNameError");
+    clearError(firstNameError);
+    const lastNameError = document.querySelector("#lastNameError");
+    clearError(lastNameError);
+    const dobError = document.querySelector("#DOBError");
+    clearError(dobError);
+
+    const firstName = document.querySelector("#first-nameInput").value.trim()
+    const lastName = document.querySelector("#last-nameInput").value.trim()
     const day = document.querySelector("#dobDay").value
     const month = document.querySelector("#dobMonth").value
     const year = document.querySelector("#dobYear").value
 
-    const dateOfBirth = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
-
     const nameRegex = /^[a-zA-Z\s]+$/
 
     if (firstName.trim() === '') {
-        firstNameError.textContent = "First name is required."
-        firstNameError.classList.remove('hidden');
+        showError(firstNameError, "First name is required.");
     } else if (!nameRegex.test(firstName)) {
-        firstNameError.textContent = "First name can only contain letters."
-        firstNameError.classList.remove('hidden');
+        showError(firstNameError, "First name can only contain letters.");
     } else if (lastName.trim() === '') {
-        lastNameError.textContent = "Last name is required."
-        lastNameError.classList.remove('hidden');
+        showError(lastNameError, "Last name is required.");
     } else if(!nameRegex.test(lastName)) {
-        lastNameError.textContent = "Last name can only contain letters."
-        lastNameError.classList.remove('hidden');
+        showError(lastNameError, "Last name can only contain letters.");
     } else if (day === '' || month === '' || year === '') {
-        dobError.textContent = "Please enter a valid birth date";
-        dobError.classList.remove('hidden');
+        showError(dobError, "Please enter a valid birth date");
+    } else if (!isValidDateOfBirth(day, month, year)){
+        showError(dobError, "Please enter a real birth date");
+    } else if (!isAtLeastMinimumAge(day, month, year)){
+        showError(dobError, `You must be at least ${MINIMUM_AGE} years old.`);
     } else {
         hide(step2);
         show(step3);
-        firstNameError.classList.add('hidden');
-        lastNameError.classList.add('hidden');
-        dobError.classList.add('hidden');
+        clearError(firstNameError);
+        clearError(lastNameError);
+        clearError(dobError);
     }
 }); 
 
 document.querySelector("#next-3").addEventListener("click", () => {
+
+
     const countryError = document.querySelector("#countryError");
+    clearError(countryError);
     const phoneNumberError = document.querySelector("#phoneNumberError");
+    clearError(phoneNumberError);
 
     const country = document.querySelector("#country").value
-    const phoneNumber = document.querySelector("#phoneNumberInput").value
+    const phoneNumber = document.querySelector("#phoneNumberInput").value.trim()
 
     const expectedCode = countryCodes[country];
+    const expectedPrefix = expectedCode ? `${expectedCode} ` : "";
     const phoneRegex = /^\+\d+\s?\d{7,15}$/
 
     if(country === '') {
-        countryError.textContent = "Please select your country of residence";
-        countryError.classList.remove('hidden');
+        showError(countryError, "Please select your country of residence.");
     } else if (phoneNumber ==='' || phoneNumber === expectedCode) {
-        phoneNumberError.textContent = "Please enter a valid phone number";
-        phoneNumberError.classList.remove('hidden');
+        showError(phoneNumberError, "Please enter a valid phone number.");
+    } else if(!phoneNumber.startsWith(expectedPrefix)){
+        showError(phoneNumberError, `Phone number must start with ${expectedCode}.`);
     } else if (!phoneRegex.test(phoneNumber)) {
-        phoneNumberError.textContent = "Please enter a valid phone number."        
-        phoneNumberError.classList.remove('hidden');
+        showError(phoneNumberError, "Please enter a valid phone number.");
     }else {
         hide(step3);
         show(step4);
-        countryError.classList.add('hidden');
-        phoneNumberError.classList.add('hidden')
+        clearError(countryError)
+        clearError(phoneNumberError)
     }
 });
 
@@ -169,11 +212,16 @@ document.querySelector("#country").addEventListener("change", () => {
 document.querySelector("#phoneNumberInput").addEventListener("input", () => {
     const country = document.querySelector("#country").value
     const phoneInput = document.querySelector("#phoneNumberInput")
-    const expectedCode = countryCodes[country] + " "
+    const expectedCode = countryCodes[country];
+    
+    if (!country || !expectedCode) {return;}
 
-    if (!phoneInput.value.startsWith(expectedCode)) {
-        phoneInput.value = expectedCode
+    const expectedPrefix = expectedCode + " ";
+
+    if (!phoneInput.value.startsWith(expectedPrefix)) {
+        phoneInput.value = expectedPrefix;
     }
+
 });
 
 document.querySelector("#back-to-step-0").addEventListener("click", () => {
@@ -198,32 +246,32 @@ document.querySelector("#back-to-step-3").addEventListener("click", () => {
 
 document.querySelector("#createAccountBtn").addEventListener("click", async () => {
 
-
-    const email = document.querySelector("#email").value
-    const firstName = document.querySelector("#first-nameInput").value
-    const lastName = document.querySelector("#last-nameInput").value
+    const email = document.querySelector("#email").value.trim()
+    const firstName = document.querySelector("#first-nameInput").value.trim()
+    const lastName = document.querySelector("#last-nameInput").value.trim()
     const day = document.querySelector("#dobDay").value
     const month = document.querySelector("#dobMonth").value
     const year = document.querySelector("#dobYear").value
     const dateOfBirth = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
     const country = document.querySelector("#country").value
-    const phoneNumber = document.querySelector("#phoneNumberInput").value
+    const phoneNumber = document.querySelector("#phoneNumberInput").value.trim();
     const password = document.querySelector("#passwordInput").value
 
     const passwordError = document.querySelector("#passwordError");
+    const registerError = document.querySelector("#registerError");
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/
 
     const btn = document.querySelector("#createAccountBtn");
+    clearError(passwordError);
+    clearError(registerError)
 
 
     if (password === ''){
-        passwordError.textContent = "Password is required."
-        passwordError.classList.remove('hidden');
+        showError(passwordError, "Password is required.");
         return;
     } else if (!passwordRegex.test(password)) {
-    passwordError.textContent = "Password must contain uppercase, lowercase, number and special character."
-    passwordError.classList.remove('hidden');
-    return;
+        showError(passwordError, "Password must contain uppercase, lowercase, number, and special character.");
+        return;
     }
 
     btn.disabled = true;
@@ -233,14 +281,12 @@ document.querySelector("#createAccountBtn").addEventListener("click", async () =
      </svg>`
 
     try {
-         const data = await register(firstName, lastName, dateOfBirth, country, phoneNumber, email, password);
-         window.location.href = `../pages/verify.html?phone=${phoneNumber}&code=${data.verificationCode}`
+        await register(firstName, lastName, dateOfBirth, country, phoneNumber, email, password);
+        window.location.href = `../pages/verify.html?phone=${encodeURIComponent(phoneNumber)}`
     } catch (error) {
         console.log(error.message);
         btn.disabled = false
         btn.innerHTML = "Create"
-       const registerError = document.querySelector("#registerError");
-       registerError.textContent = error.message;
-       registerError.classList.remove('hidden');
+       showError(registerError, error.message);
     }
 })
