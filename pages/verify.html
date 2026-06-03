@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Verify phone number</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-[#2D0A45] flex min-h-screen items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 w-full max-w-md shadow-lg">
+            <h1 class="text-2xl font-bold text-[#2D0A45] mb-2">Please verify your phone number</h1>
+            <p class="text-gray-500 text-sm mb-6">Enter the 6-digit code sent to
+                <span id="phoneText" class="font-semibold text-[#2D0A45]"></span>
+            </p>
+            <div id="codeInputs" class="flex justify-between gap-2 mb-4">
+                <input type="text" maxlength="1" inputmode="numeric" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-xl text-lg font-semibold text-[#2D0A45] focus:outline-none focus:border-[#2D0A45]"/>
+                <input type="text" maxlength="1" inputmode="numeric" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-xl text-lg font-semibold text-[#2D0A45] focus:outline-none focus:border-[#2D0A45]"/>
+                <input type="text" maxlength="1" inputmode="numeric" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-xl text-lg font-semibold text-[#2D0A45] focus:outline-none focus:border-[#2D0A45]"/>
+                <input type="text" maxlength="1" inputmode="numeric" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-xl text-lg font-semibold text-[#2D0A45] focus:outline-none focus:border-[#2D0A45]"/>
+                <input type="text" maxlength="1" inputmode="numeric" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-xl text-lg font-semibold text-[#2D0A45] focus:outline-none focus:border-[#2D0A45]"/>
+                <input type="text" maxlength="1" inputmode="numeric" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-xl text-lg font-semibold text-[#2D0A45] focus:outline-none focus:border-[#2D0A45]"/>
+            </div>
+            <p id="verifyError" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
+            <button id="verifyBtn" class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">Verify</button>
+            <a href="./register.html" class="block text-center text-sm text-gray-400 mt-4 hover:text-[#2D0A45] transition">Back to register</a>
+        </div>
+        <script src="../js/verify.js" type="module" defer></script>
+    </body>
+</html>
