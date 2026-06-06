@@ -281,7 +281,12 @@ document.querySelector("#createAccountBtn").addEventListener("click", async () =
      </svg>`
 
     try {
-        await register(firstName, lastName, dateOfBirth, country, phoneNumber, email, password);
+        const data = await register(firstName, lastName, dateOfBirth, country, phoneNumber, email, password);
+
+        if (data.verificationCode) {
+            sessionStorage.setItem("demoVerificationCode", data.verificationCode);
+        }
+
         window.location.href = `../pages/verify.html?phone=${encodeURIComponent(phoneNumber)}`
     } catch (error) {
         console.log(error.message);
