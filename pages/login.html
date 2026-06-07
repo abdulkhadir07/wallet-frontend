@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Login</title>
+</head>
+<body class="bg-[#2D0A45] flex min-h-screen items-center justify-center">
+    <div class="bg-white rounded-2xl p-8 w-full max-w-md shadow-lg">
+        <h1 class="text-2xl font-bold text-[#2D0A45] mb-6">Login to your account</h1>
+
+        <div class="mb-4">
+            <label for="phoneNumberInput" class="block text-sm font-medium text-[#2D0A45] mb-2">Phone number</label>
+            <input id="phoneNumberInput" type="tel" placeholder="Enter your phone number" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45]"/>
+            <p id="phoneNumberError" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
+        </div>
+
+        <div class="mb-6">
+            <label for="passwordInput" class="block text-sm font-medium text-[#2D0A45] mb-2">Password</label>
+            <input id="passwordInput" type="password" placeholder="Enter your password" class="w-full border mb-4 border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45]"/>
+            <p id="passwordError" class="text-red-500 text-sm mt-1 mb-2 hidden"></p>
+        </div>
+
+        <button id="loginBtn" type="button" class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">Login</button>
+        <a href="./register.html" class="block text-center text-sm text-gray-400 mt-4 hover:text-[#2D0A45] transition">Don't have an account? Create one</a>
+
+    </div>
+    <script src="../js/login.js" type="module" defer></script>
+</body>
+</html>
