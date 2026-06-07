@@ -243,6 +243,9 @@ document.querySelector("#back-to-step-3").addEventListener("click", () => {
     hide(step4);
     show(step3);
 });
+document.querySelector("#login-btn").addEventListener("click", () => {
+    window.location.href = "../pages/login.html";
+})
 
 document.querySelector("#createAccountBtn").addEventListener("click", async () => {
 
