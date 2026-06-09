@@ -1,24 +1,24 @@
 const TOKEN_KEY = "enum_token";
 
-function saveToken(token) {
+export function saveToken(token) {
     localStorage.setItem(TOKEN_KEY, token)
 }
 
-function getToken() {
+export function getToken() {
     return localStorage.getItem(TOKEN_KEY);
 }
 
-function isLoggedIn() {
+export function isLoggedIn() {
    const token = getToken();
    return Boolean(token && token.trim());
 }
 
-function logout() {
+export function logout() {
     localStorage.removeItem(TOKEN_KEY);
     window.location.href = "../pages/login.html";
 }
 
-function requireAuth() {
+export function requireAuth() {
     if (!isLoggedIn()) {
         window.location.href = "../pages/login.html"
     };

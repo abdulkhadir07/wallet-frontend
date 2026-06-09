@@ -1,4 +1,5 @@
 import { login } from './api.js'
+import { saveToken } from './auth.js'
 
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 const passwordInput = document.querySelector("#passwordInput");
@@ -40,7 +41,7 @@ loginBtn.addEventListener("click" , async () => {
 
     try {
         const data = await login(phoneNumber, password);
-        localStorage.setItem("enum_token", data.token);
+        saveToken(data.token);
         window.location.href = "./dashboard.html";
 
     } catch (error) {

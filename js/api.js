@@ -1,3 +1,4 @@
+import { getToken } from './auth.js'
 const BASE_URL = "https://digital-wallet-api-551y.onrender.com"
 
 function getAuthHeaders() {
