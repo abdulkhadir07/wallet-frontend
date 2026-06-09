@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Linkcore</title>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <main class="max-w-5xl mx-auto px-4 py-6">
+        <p id="dashboardError" class="text-red-500 text-sm mb-4 hidden"></p>
+        
+        <header class="mb-6">
+            <h1 class="text-2xl font-bold text-[#2D0A45]">Linkcore</h1>
+        </header>
+        
+        <!-- Balance card -->
+         <section class="mb-6">
+            <h2 class="text-lg font-semibold text-[#2D0A45] mb-3">Account</h2>
+
+            <div class="bg-[#A47E1B] text-white rounded-2xl p-6 shadow-lg">
+                <div class="flex items-end gap-2 mb-3">
+                    <span id="walletBalance" class="text-3xl font-bold">Loading...</span>
+                    <span id="walletCurrency" class="text-2xl font-semibold text-white/80 mb-1"></span>
+                </div>
+
+                <p id="walletStatus" class="inline-flex rounded-full px-3 py-1 text-xs font-semibold bg-white/20 text-white">Loading status...</p>
+            </div>
+
+        </section>
+        <!-- Quick actions -->
+         <section class="mb-6">
+            <h2 class="text-lg font-semibold text-[#2D0A45] mb-3">Move Money</h2>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button id="sendBtn" class="bg-[#2D0A45] text-white px-4 py-3 rounded-xl font-semibold hover:opacity-90 transition">Send</button>
+                    <button id="depositBtn" class="bg-[#2D0A45] text-white px-4 py-3 rounded-xl font-semibold hover:opacity-90 transition">Deposit</button>
+                    <button id="withdrawBtn" class="bg-[#2D0A45] text-white px-4 py-3 rounded-xl font-semibold hover:opacity-90 transition">Withdraw</button>
+                    <button id="convertBtn" class="bg-[#2D0A45] text-white px-4 py-3 rounded-xl font-semibold hover:opacity-90 transition">Convert</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- recent transactions -->
+         <section class="mb-6">
+            <div class="flex items-center justify-between gap-4 mb-3">
+                <h2 class="text-lg font-semibold text-[#2D0A45]">Recent activity</h2>
+                <a href="./history.html" class="text-sm font-semibold text-[#A47E1B] hover:text-[#2D0A45] transition whitespace-nowrap">See all</a>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <ul id="transactionsList" class="divide-y divide-gray-100">
+                    <li class="py-3 text-sm text-gray-500">Loading transactions...</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Overview-->
+         <section>
+            <h2 class="text-lg font-semibold text-[#2D0A45] mb-3">Money Overview</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <div class="bg-[#F7F1E3] text-[#2D0A45] rounded-2xl p-6 shadow-sm">
+                    <p class="text-sm text-[#2D0A45]/70 mb-2">Total sent</p>
+                    <p id="totalSent" class="text-2xl font-bold text-[#2D0A45]">Loading...</p>
+                </div>
+
+                <div class="bg-[#BCC6CC] text-[#2D0A45] rounded-2xl p-6 shadow-sm">
+                    <p class="text-sm text-[#2D0A45]/70 mb-2">Total received</p>
+                    <p id="totalReceived" class="text-2xl font-bold text-[#2D0A45]">Loading...</p>
+                </div>
+            </div>
+         </section>
+    </main>
+    <script src="../js/dashboard.js" type="module" defer></script>
+</body>
+</html>
