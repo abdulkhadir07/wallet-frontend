@@ -1,4 +1,4 @@
-import { getWallet, getTransactions} from './api.js'
+import { getWallet, getTransactions } from './api.js'
 import { requireAuth, logout } from './auth.js'
 import { formatCurrency, formatDate, formatTransactionType } from './utils.js'
 
@@ -62,12 +62,12 @@ async function loadWallet() {
             walletStatus.classList.add("bg-red-100", "text-red-700");
         } else {
             walletStatus.classList.add("bg-white/20", "text-white");
-}
-
+        }
+    
     } catch (error) {
         if (handleAuthError(error)) {
-        return;
-    }
+            return;
+        }
         showError(error.message);
     }
 }
@@ -94,33 +94,32 @@ async function loadTransactions() {
         transactionsList.innerHTML = recentTransactions.map((transaction) => {
             
             return `
-            
-            <li class="py-3 flex items-center justify-between gap-4">
-                <div>
-                    <p class="text-sm font-semibold text-[#2D0A45]">
-                    ${transaction.description || transaction.transactionSource}
-                    </p>
-                    <p class="text-xs text-gray-500">
-                    ${formatTransactionType(transaction.transactionType)} • ${formatDate(transaction.createdAt)}
-                    </p>
-                </div>
+                <li class="py-3 flex items-center justify-between gap-4">
+                    <div>
+                        <p class="text-sm font-semibold text-[#2D0A45]">
+                            ${transaction.description || transaction.transactionSource}
+                        </p>
+                        <p class="text-xs text-gray-500">
+                            ${formatTransactionType(transaction.transactionType)} • ${formatDate(transaction.createdAt)}
+                        </p>
+                    </div>
 
-                <div class="text-right">
-                    <p class="text-sm font-semibold text-[#2D0A45]">
-                    ${formatCurrency(transaction.amount, currentCurrency)}
-                    </p>
-                    <p class="text-xs text-gray-500">
-                    ${transaction.transactionStatus}
-                    </p>
-                </div>
-            </li>
-    `;
-}).join("");
+                    <div class="text-right">
+                        <p class="text-sm font-semibold text-[#2D0A45]">
+                            ${formatCurrency(transaction.amount, currentCurrency)}
+                        </p>
+                        <p class="text-xs text-gray-500">
+                            ${transaction.transactionStatus}
+                        </p>
+                    </div>
+                </li>
+            `;
+        }).join("");
 
     } catch (error) {
         if (handleAuthError(error)) {
-        return;
-    }
+            return;
+        }
         showError(error.message);
     }
 }

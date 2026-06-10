@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>History</title>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <main class="max-w-5xl mx-auto px-4 py-6">
+        <a href="./dashboard.html" class="text-sm font-semibold text-gray-900 hover:text-[#2D0A45] transition">&lt; Back </a>
+
+        <header class="mt-4 mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <h1 class="text-2xl font-bold text-[#2D0A45]">Activity history</h1>
+            <input id="historySearchInput" type="search" placeholder="Search..." class="w-full md:w-80 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45]"/>
+        </header>
+
+        <p id="historyError" class="text-red-500 text-sm mb-4 hidden"></p>
+
+        <div class="flex flex-wrap gap-3 mb-6">
+            <button id="filterAllBtn" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#2D0A45] text-white">All</button>
+            <button id="filterSentBtn" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-white text-[#2D0A45] border border-gray-200">Sent</button>
+            <button id="filterReceivedBtn" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-white text-[#2D0A45] border border-gray-200">Received</button>
+            <button id="filterDepositsBtn" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-white text-[#2D0A45] border border-gray-200">Deposits</button>
+            <button id="filterWithdrawalsBtn" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-white text-[#2D0A45] border border-gray-200">Withdrawals</button>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <ul id="historyList" class="divide-y divide-gray-100">
+                <li class="py-3 text-sm text-gray-500">Loading...</li>
+            </ul>
+        </div>
+        
+    </main>
+
+    <script src="../js/history.js" type="module" defer></script>
+</body>
+</html>
