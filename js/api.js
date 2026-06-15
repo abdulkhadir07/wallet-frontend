@@ -174,3 +174,28 @@ export async function unfreezeWallet() {
     const data = await response.json();
     return data;
 }
+
+export async function getQuote(recipientPhoneNumber, senderAmount) {
+    const response = await fetch(`${BASE_URL}/transfer/quote`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+            recipientPhoneNumber: recipientPhoneNumber,
+            senderAmount: senderAmount
+        })
+    });
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
+
+export async function searchRecipients(phoneNumber) {
+    const response = await fetch(`${BASE_URL}/transfer/recipients/search?phone=${encodeURIComponent(phoneNumber)}`, {
+        method: "GET",
+        headers: getAuthHeaders()
+    });
+
+    await assertOk(response);
+    const data = await response.json();
+    return data;
+}
