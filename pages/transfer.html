@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <main class="max-w-3xl mx-auto px-4 py-6">
+        <a href="./dashboard.html" class="text-sm font-semibold text-gray-900 hover:text-[#2D0A45] transition">&lt; Back</a>
+
+        <header class="mt-4 mb-6">
+            <h1 class="text-2xl font-bold text-[#2D0A45]">Send money anywhere</h1>
+            <p class="text-sm text-gray-500 mt-1">Enter the recipient and amount to see what they will receive.</p>
+        </header>
+
+        <p id="transferError" class="text-red-500 text-sm mb-4 hidden"></p>
+
+        <section class="bg-white rounded-2xl p-6 shadow-sm">
+            <label for="recipientPhoneNumberInput" class="block text-sm font-medium text-[#2D0A45] mb-2">Recipient phone number</label>
+            <div class="flex items-center border border-gray-300 rounded-xl px-4 focus-within:border-[#2D0A45]">
+                <input id="recipientPhoneNumberInput" type="tel" placeholder="Enter recipient phone number" class="w-full py-3 text-sm focus:outline-none bg-transparent appearance-none"/>
+            </div>
+
+            <div id="recipientResults" class="hidden mt-2 rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden"></div>
+
+            <div class="flex items-start gap-2 mt-2 text-xs text-gray-500">
+                <span class="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full border border-gray-300 text-[10px] font-semibold text-gray-500">i</span>
+                <p>Transfers can only be sent to registered Linkcore users.</p>
+            </div>
+
+            <label for="amountInput" class="block text-sm font-medium text-[#2D0A45] mt-5 mb-2">You send</label>
+            <div class="flex items-center border border-gray-300 rounded-xl focus-within:border-[#2D0A45]">
+                <span id="senderCurrencySymbol" class="pl-4 pr-2 text-sm font-semibold text-[#2D0A45]">$</span>
+                <input id="amountInput" type="number" placeholder="Enter the amount to send" min="0.01" step="0.01" class="w-full py-3 text-sm focus:outline-none"/>
+                <span id="senderCurrencyText" class="px-4 text-sm font-semibold text-[#2D0A45] border-l border-gray-200">---</span>
+            </div>
+            
+
+            <div id="quoteBox" class="hidden mt-4 rounded-xl bg-[#F7F1E3] px-4 py-3">
+                <p class="text-sm text-[#2D0A45]/70">Recipient gets</p>
+                <p id="recipientGetsText" class="text-2xl font-bold text-[#2D0A45]">-</p>
+                <p id="quoteSummaryText" class="text-xs text-[#2D0A45]/70 mt-1"></p>
+            </div>
+
+            <label for="descriptionInput" class="block text-sm font-medium text-[#2D0A45] mt-5 mb-2">Description</label>
+            <input id="descriptionInput" type="text" placeholder="Optional" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2D0A45]"/>
+
+            <button id="reviewBtn" disabled class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition mt-6 disabled:opacity-50 disabled:cursor-not-allowed">Review and Send</button>
+        </section>
+    </main>
+    <script src="../js/transfer.js" type="module" defer></script>
+</body>
+</html>
