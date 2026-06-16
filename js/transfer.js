@@ -43,12 +43,23 @@ function resetQuote() {
 function getCurrencySymbol(currency) {
     const symbols = {
         USD: "$",
-        GBP: "£",
+        CAD: "C$",
         EUR: "€",
-        CAD: "$",
+        GBP: "£",
+        CHF: "CHF",
+        JPY: "¥",
+        INR: "₹",
+        CNY: "¥",
+        KRW: "₩",
         GMD: "D",
         NGN: "₦",
-        GHS: "₵"
+        GHS: "₵",
+        ZAR: "R",
+        MAD: "MAD",
+        ETB: "Br",
+        XAF: "FCFA",
+        XOF: "CFA",
+        KES: "KSh"
     };
 
     return symbols[currency] || currency;

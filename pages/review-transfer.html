@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review transfer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <main class="max-w-3xl mx-auto px-4 py-6">
+        <a href="./transfer.html" class="text-sm font-semibold text-gray-900 hover:text-[#2D0A45] transition">&lt; Back</a>
+
+        <header class="mt-4 mb-6">
+            <h1 class="text-2xl font-bold text-[#2D0A45]">Review your transfer</h1>
+            <p class="text-sm text-gray-500 mt-1">Confirm the details before sending.</p>
+        </header>
+
+        <p id="reviewError" class="text-red-500 text-sm mb-4 hidden"></p>
+
+        <section class="bg-white rounded-2xl p-6 shadow-sm">
+
+            <div class="mb-6">
+                <p class="text-sm text-gray-500">Recipient gets</p>
+                <p id="reviewRecipientGets" class="text-3xl font-bold text-[#2D0A45]">-</p>
+            </div>
+
+            <div class="space-y-4 text-sm">
+
+                <div class="flex justify-between gap-4">
+                    <span class="text-gray-500">You send</span>
+                    <span id="reviewSenderAmount" class="font-semibold text-[#2D0A45] text-right"></span>
+                </div>
+
+                <div id="reviewRateRow" class="hidden flex justify-between gap-4">
+                    <span class="text-gray-500">Rate</span>
+                    <span id="reviewRate" class="font-semibold text-[#2D0A45] text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4">
+                    <span class="text-gray-500">Fee</span>
+                    <span id="reviewFee" class="font-semibold text-[#2D0A45] text-right"></span>
+                </div>
+                
+                <div class="flex justify-between gap-4">
+                    <span class="text-gray-500">Total debit</span>
+                    <span id="reviewTotalDebit" class="font-semibold text-[#2D0A45] text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4">
+                    <span class="text-gray-500">Recipient name</span>
+                    <span id="reviewRecipient" class="font-semibold text-[#2D0A45] text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4">
+                    <span class="text-gray-500">Recipient phone number</span>
+                    <span id="reviewRecipientPhoneNumber" class="font-semibold text-[#2D0A45] text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4">
+                    <span class="text-gray-500">Transfer type</span>
+                    <span id="reviewTransferType" class="font-semibold text-[#2D0A45] text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4">
+                    <span class="text-gray-500">Description</span>
+                    <span id="reviewDescription" class="font-semibold text-[#2D0A45] text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4">
+                    <span class="text-gray-500">Date</span>
+                    <span id="reviewDate" class="font-semibold text-[#2D0A45] text-right"></span>
+                </div>
+            </div>
+
+            <button id="sendNowBtn" class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition mt-6">Send now</button>
+        </section>
+
+    </main>
+    <script src="../js/review-transfer.js" type="module" defer></script>
+</body>
+</html>
