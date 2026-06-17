@@ -1,8 +1,33 @@
 export function formatCurrency(amount, currency) {
-    return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: currency
-    }).format(amount)
+    const symbols = {
+        USD: "$",
+        CAD: "C$",
+        EUR: "€",
+        GBP: "£",
+        CHF: "CHF",
+        JPY: "¥",
+        INR: "₹",
+        CNY: "¥",
+        KRW: "₩",
+        GMD: "D",
+        NGN: "₦",
+        GHS: "₵",
+        ZAR: "R",
+        MAD: "MAD",
+        ETB: "Br",
+        XAF: "FCFA",
+        XOF: "CFA",
+        KES: "KSh"
+    };
+
+    const formattedAmount = new Intl.NumberFormat("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(Number(amount));
+
+    const symbol = symbols[currency] || currency;
+
+    return `${symbol}${formattedAmount}`;
 }
 
 export function formatDate(dateString) {
