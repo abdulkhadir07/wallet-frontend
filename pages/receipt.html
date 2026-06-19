@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction receipt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    @media print {
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+
+        body {
+            background: white !important;
+        }
+
+        main {
+            max-width: none !important;
+            padding: 0 !important;
+        }
+
+        section {
+            box-shadow: none !important;
+        }
+    }
+    </style>
+    </head>
+<body class="bg-gray-50 min-h-screen print:min-h-0"">
+    <main class="max-w-3xl mx-auto px-4 py-8 print:max-w-none print:p-0">
+        <section class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm print:p-4 print:border-0">
+            <header class="border-b border-gray-200 pb-5 mb-6">
+                <h1 class="text-2xl font-bold text-[#2D0A45]">Linkcore</h1>
+                <p class="text-sm text-gray-500 mt-1">Transaction receipt</p>
+            </header>
+
+            <p id="receiptError" class="text-red-500 text-sm mb-4 hidden"></p>
+
+            <div class="mb-6">
+                <p class="text-sm text-gray-500">Amount</p>
+                <p id="receiptAmount" class="text-4xl font-bold text-[#2D0A45] mt-1">-</p>
+            </div>
+            
+            <section id="receiptTransferSection" class="hidden mb-8">
+                <h2 class="text-sm font-semibold text-gray-900 mb-3">Transfer details</h2>
+                
+                <div class="text-sm">
+                    <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span id="receiptCounterpartyLabel" class="text-gray-500">Counterparty</span>
+                        <span id="receiptCounterparty" class="font-semibold text-gray-900 text-right"></span>
+                    </div>
+                    
+                    <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span id="receiptCounterpartyPhoneLabel" class="text-gray-500">Counterparty phone</span>
+                        <span id="receiptCounterpartyPhone" class="font-semibold text-gray-900 text-right"></span>
+                    </div>
+                    
+                    <div id="receiptRecipientReceivedRow" class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span class="text-gray-500">Recipient received</span>
+                        <span id="receiptRecipientReceived" class="font-semibold text-gray-900 text-right"></span>
+                    </div>
+                    
+                    <div id="receiptTransferFeeRow" class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span class="text-gray-500">Fee</span>
+                        <span id="receiptTransferFee" class="font-semibold text-gray-900 text-right"></span>
+                    </div>
+                    
+                    <div id="receiptTransferRateRow" class="hidden flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span class="text-gray-500">Rate</span>
+                        <span id="receiptTransferRate" class="font-semibold text-gray-900 text-right"></span>
+                    </div>
+                    
+                    <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span class="text-gray-500">Transfer reference</span>
+                        <span id="receiptTransferReference" class="font-mono font-semibold text-gray-900 text-right"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="text-sm">
+                <h2 class="text-sm font-semibold text-gray-900 mb-3">Transaction record</h2>
+                <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span class="text-gray-500">Type</span>
+                    <span id="receiptType" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span class="text-gray-500">Source</span>
+                    <span id="receiptSource" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span class="text-gray-500">Status</span>
+                    <span id="receiptStatus" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span class="text-gray-500">Transaction reference</span>
+                    <span id="receiptReference" class="font-mono font-semibold text-gray-900 text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span class="text-gray-500">Description</span>
+                    <span id="receiptDescription" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+
+                <div class="flex justify-between gap-4 py-3">
+                    <span class="text-gray-500">Date</span>
+                    <span id="receiptDate" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+            </section>
+
+            <p class="text-xs text-gray-400 text-center mt-8">Generated by Linkcore</p>
+        </section>
+
+        <button id="printReceiptBtn" class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition mt-6 print:hidden">
+            Save as PDF
+        </button>
+    </main>
+
+    <script src="../js/receipt.js" type="module" defer></script>
+</body>
+</html>
