@@ -55,25 +55,61 @@
             </div>
         </section>
 
+        <section id="transferDetailsSection" class="hidden bg-white border border-gray-200 rounded-2xl p-6 shadow-sm mb-5">
+            <h2 class="text-sm font-semibold text-gray-900 mb-4">Transfer details</h2>
+            
+            <div class="text-sm">
+                <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span id="detailCounterpartyLabel" class="text-gray-500">Counterparty</span>
+                    <span id="detailCounterparty" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+                
+                <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span id="detailCounterpartyPhoneLabel" class="text-gray-500">Counterparty phone</span>
+                    <span id="detailCounterpartyPhone" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+
+                <div id="detailRecipientReceivedRow" class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span class="text-gray-500">Recipient received</span>
+                    <span id="detailRecipientReceived" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+                
+                <div id="detailTransferFeeRow" class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span class="text-gray-500">Fee</span>
+                    <span id="detailTransferFee" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+                
+                <div id="detailTransferRateRow" class="hidden flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                    <span class="text-gray-500">Rate</span>
+                    <span id="detailTransferRate" class="font-semibold text-gray-900 text-right"></span>
+                </div>
+                
+                <div class="flex justify-between gap-4 py-3">
+                    <span class="text-gray-500">Transfer reference</span>
+                    <span id="detailTransferReference" class="font-mono font-semibold text-gray-900 text-right"></span>
+                </div>
+            </div>
+        </section>
+
         <section class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
             <h2 class="text-sm font-semibold text-gray-900 mb-4">Transaction record</h2>
 
             <div class="text-sm">
                 <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
-                    <span class="text-gray-500">Reference</span>
+                    <span class="text-gray-500">Transaction reference</span>
                     <span id="detailReference" class="font-mono font-semibold text-gray-900 text-right"></span>
                 </div>
 
-                <div class="flex justify-between gap-4 py-3">
+                <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
                     <span class="text-gray-500">Description</span>
                     <span id="detailDescription" class="font-semibold text-gray-900 text-right"></span>
                 </div>
 
-                <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                <div class="flex justify-between gap-4 py-3">
                     <span class="text-gray-500">Date</span>
                     <span id="detailDate" class="font-semibold text-gray-900 text-right"></span>
                 </div>
-                
+
             </div>
 
             <button id="downloadBtn" class="w-full border-2 border-gray-900 text-gray-900 py-3 rounded-xl font-semibold hover:bg-gray-900 hover:text-white transition mt-6">
