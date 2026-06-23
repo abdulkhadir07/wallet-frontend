@@ -199,3 +199,16 @@ export async function searchRecipients(phoneNumber) {
     const data = await response.json();
     return data;
 }
+
+export async function deposit(amount, paymentMethod) {
+    const response = await fetch(`${BASE_URL}/wallet/deposit`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+            amount: amount,
+            paymentMethod: paymentMethod
+        })
+    });
+    await assertOk(response);
+    return await response.json();
+}

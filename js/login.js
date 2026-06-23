@@ -42,6 +42,7 @@ loginBtn.addEventListener("click" , async () => {
     try {
         const data = await login(phoneNumber, password);
         saveToken(data.token);
+        localStorage.setItem("enum_phone", phoneNumber);
         window.location.href = "./dashboard.html";
 
     } catch (error) {

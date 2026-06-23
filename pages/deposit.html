@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit - Linkcore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <main class="max-w-3xl mx-auto px-4 py-6">
+        <a href="./dashboard.html" class="text-sm font-semibold text-gray-900 hover:text-[#2D0A45] transition">&lt; Back</a>
+
+        <header class="mt-4 mb-6">
+            <h1 class="text-2xl font-bold text-[#2D0A45]">Deposit funds</h1>
+            <p class="text-sm text-gray-500 mt-1">Add money to your Linkcore wallet.</p>
+        </header>
+
+        <p id="depositError" class="text-red-500 text-sm mb-4 hidden"></p>
+
+        <!-- Step 1: Choose method -->
+        <div id="step-method">
+            <p class="text-sm font-medium text-[#2D0A45] mb-4">How would you like to deposit?</p>
+
+            <div class="grid grid-cols-1 gap-4">
+
+                <!-- Bank Transfer -->
+                <button id="selectBankTransfer" class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm text-left hover:border-[#2D0A45] transition">
+                    <p class="text-base font-semibold text-[#2D0A45]">Bank Transfer</p>
+                    <p class="text-sm text-gray-500 mt-1">Send money from your bank account to your Linkcore wallet manually.</p>
+                </button>
+
+                <!-- Debit Card -->
+                <button id="selectDebitCard" class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm text-left hover:border-[#2D0A45] transition">
+                    <p class="text-base font-semibold text-[#2D0A45]">Debit Card</p>
+                    <p class="text-sm text-gray-500 mt-1">Deposit instantly using your debit card.</p>
+                </button>
+
+                <!-- Agent (disabled) -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm opacity-50 cursor-not-allowed">
+                    <div class="flex items-center justify-between">
+                        <p class="text-base font-semibold text-[#2D0A45]">Agent</p>
+                        <span class="text-xs font-semibold text-gray-400 border border-gray-300 rounded-full px-3 py-1">Coming soon</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">Visit a Linkcore agent location near you to deposit cash.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Step 2a: Bank Transfer -->
+        <div id="step-bank-transfer" class="hidden">
+            <button id="backFromBankTransfer" class="text-sm text-gray-400 hover:text-[#2D0A45] transition mb-6">&larr; Back</button>
+
+            <p class="text-sm font-medium text-[#2D0A45] mb-4">Bank transfer instructions</p>
+
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm mb-5">
+                <p class="text-xs uppercase tracking-wide text-gray-400 mb-4">Transfer to this account</p>
+
+                <div class="space-y-4 text-sm">
+                    <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span class="text-gray-500">Bank name</span>
+                        <span class="font-semibold text-gray-900">Linkcore Financial Bank</span>
+                    </div>
+
+                    <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span class="text-gray-500">Account name</span>
+                        <span class="font-semibold text-gray-900">Linkcore Inc.</span>
+                    </div>
+
+                    <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span class="text-gray-500">Account number</span>
+                        <span class="font-mono font-semibold text-gray-900">0123456789</span>
+                    </div>
+
+                    <div class="flex justify-between gap-4 py-3 border-b border-dashed border-gray-200">
+                        <span class="text-gray-500">Routing number</span>
+                        <span class="font-mono font-semibold text-gray-900">021000021</span>
+                    </div>
+
+                    <div class="flex justify-between gap-4 py-3">
+                        <span class="text-gray-500">Reference</span>
+                        <span id="depositReference" class="font-mono font-semibold text-gray-900">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#F7F1E3] rounded-2xl px-4 py-3 mb-5 text-sm text-[#2D0A45]/80">
+                Use your phone number as the payment reference so we can identify your deposit. Your wallet will be credited within 1-2 business days after confirmation.
+            </div>
+
+            <label for="bankTransferAmount" class="block text-sm font-medium text-[#2D0A45] mb-2">Amount you are sending</label>
+            <div class="flex items-center border border-gray-300 rounded-xl focus-within:border-[#2D0A45] mb-5">
+                <span class="pl-4 pr-2 text-sm font-semibold text-[#2D0A45]">$</span>
+                <input id="bankTransferAmount" type="number" min="0.01" step="0.01" placeholder="Enter amount" class="w-full py-3 text-sm focus:outline-none"/>
+            </div>
+
+            <p id="bankTransferAmountError" class="text-red-500 text-sm mb-4 hidden"></p>
+
+            <button id="confirmBankTransferBtn" class="w-full bg-[#2D0A45] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
+                I have made this transfer
+            </button>
+        </div>
+
+        <!-- Step 2b: Debit Card (Coming Soon) -->
+        <div id="step-debit-card" class="hidden">
+            <button id="backFromDebitCard" class="text-sm text-gray-400 hover:text-[#2D0A45] transition mb-6">&larr; Back</button>
+
+            <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
+                <p class="text-2xl font-bold text-[#2D0A45] mb-2">Coming soon</p>
+                <p class="text-sm text-gray-500">Debit card deposits are not yet available. We are working on bringing this to you shortly.</p>
+            </div>
+        </div>
+
+    </main>
+    <script src="../js/deposit.js" type="module" defer></script>
+</body>
+</html>
