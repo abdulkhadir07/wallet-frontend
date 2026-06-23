@@ -72,6 +72,32 @@ async function loadWallet() {
     }
 }
 
+function formatTransactionTitle(transaction) {
+    if (transaction.transactionSource === "TRANSFER") {
+        if (transaction.counterpartyName) {
+            const counterpartyText = transaction.counterpartyPhoneNumber
+                ? `${transaction.counterpartyName} (${transaction.counterpartyPhoneNumber})`
+                : transaction.counterpartyName;
+
+            return transaction.transactionType === "DEBIT"
+                ? `Transfer to ${counterpartyText}`
+                : `Transfer from ${counterpartyText}`;
+        }
+
+        return transaction.transactionType === "DEBIT" ? "Transfer sent" : "Transfer received";
+    }
+
+    if (transaction.transactionSource === "BANK_DEPOSIT") {
+        return "Deposit";
+    }
+
+    if (transaction.transactionSource === "BANK_WITHDRAWAL") {
+        return "Withdrawal";
+    }
+
+    return transaction.transactionSource;
+}
+
 async function loadTransactions() {
 
     try {
@@ -92,21 +118,23 @@ async function loadTransactions() {
         
         
         transactionsList.innerHTML = recentTransactions.map((transaction) => {
+            const amountPrefix = transaction.transactionType === "DEBIT" ? "-" : "+";
+            const amountColor = transaction.transactionType === "DEBIT" ? "text-red-600" : "text-green-600";
             
             return `
                 <li class="py-3 flex items-center justify-between gap-4">
                     <div>
                         <p class="text-sm font-semibold text-[#2D0A45]">
-                            ${transaction.description || transaction.transactionSource}
+                            ${formatTransactionTitle(transaction)}
                         </p>
                         <p class="text-xs text-gray-500">
                             ${formatTransactionType(transaction.transactionType)} • ${formatDate(transaction.createdAt)}
                         </p>
                     </div>
-
+                    
                     <div class="text-right">
-                        <p class="text-sm font-semibold text-[#2D0A45]">
-                            ${formatCurrency(transaction.amount, currentCurrency)}
+                        <p class="text-sm font-semibold ${amountColor}">
+                            ${amountPrefix}${formatCurrency(transaction.amount, currentCurrency)}
                         </p>
                         <p class="text-xs text-gray-500">
                             ${transaction.transactionStatus}
