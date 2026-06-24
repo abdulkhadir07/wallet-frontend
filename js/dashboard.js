@@ -1,4 +1,4 @@
-import { getWallet, getTransactions } from './api.js'
+import { getWallet, getTransactions, getProfile } from './api.js'
 import { requireAuth, logout } from './auth.js'
 import { formatCurrency, formatDate, formatTransactionType } from './utils.js'
 
@@ -171,6 +171,17 @@ convertBtn.addEventListener("click", () => {
 async function loadDashboard() {
     await loadWallet();
     await loadTransactions();
+    await loadAvatar();
+}
+
+async function loadAvatar() {
+    try {
+        const profile = await getProfile();
+        const initials = profile.firstName.charAt(0).toUpperCase() + profile.lastName.charAt(0).toUpperCase();
+        document.querySelector("#dashboardAvatar").textContent = initials;
+    } catch (error) {
+        // fail silently — avatar is not critical
+    }
 }
 
 loadDashboard();
