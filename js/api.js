@@ -229,3 +229,25 @@ export async function withdraw(amount, paymentMethod, accountName, accountNumber
     await assertOk(response);
     return await response.json();
 }
+
+export async function getProfile() {
+    const response = await fetch(`${BASE_URL}/auth/me`, {
+        method: "GET",
+        headers: getAuthHeaders()
+    });
+    await assertOk(response);
+    return await response.json();
+}
+
+export async function changePassword(currentPassword, newPassword, confirmPassword) {
+    const response = await fetch(`${BASE_URL}/auth/change-password`, {
+        method: "PATCH",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+            currentPassword: currentPassword,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword
+        })
+    });
+    await assertOk(response);
+}
