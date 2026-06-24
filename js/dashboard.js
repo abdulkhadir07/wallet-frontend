@@ -161,7 +161,7 @@ depositBtn.addEventListener("click", () => {
 });
 
 withdrawBtn.addEventListener("click", () => {
-    showError("Withdraw is coming soon.");
+    window.location.href = "./withdrawal.html";
 });
 
 convertBtn.addEventListener("click", () => {

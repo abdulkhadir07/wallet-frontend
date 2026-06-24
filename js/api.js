@@ -212,3 +212,20 @@ export async function deposit(amount, paymentMethod) {
     await assertOk(response);
     return await response.json();
 }
+
+export async function withdraw(amount, paymentMethod, accountName, accountNumber, routingNumber, bankName) {
+    const response = await fetch(`${BASE_URL}/wallet/withdraw`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+            amount: amount,
+            paymentMethod: paymentMethod,
+            accountName: accountName,
+            accountNumber: accountNumber,
+            routingNumber: routingNumber,
+            bankName: bankName
+        })
+    });
+    await assertOk(response);
+    return await response.json();
+}
